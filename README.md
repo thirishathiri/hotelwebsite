@@ -1,11 +1,29 @@
+# 🍽️ Restaurant Website (React + Vite)
 
-  # Restaurant website design
+## 📌 Description
+This is a modern restaurant website built using React and Vite, inspired by a Figma design. The project focuses on creating a visually appealing and responsive UI for showcasing menu items, services, and restaurant information.
 
-  This is a code bundle for Restaurant website design. The original project is available at https://www.figma.com/design/fh5CNRxwyJuluA6GNxArSW/Restaurant-website-design.
+---
 
-  ## Running the code
+## 🎯 Features
+- Responsive restaurant landing page
+- Clean and modern UI design
+- Menu section with food items
+- Smooth navigation between sections
+- Interactive components and animations
 
-  Run `npm i` to install the dependencies.
+---
 
-  Run `npm run dev` to start the development server.
+## 🛠️ Tech Stack
+
+- Frontend: React.js
+- Build Tool: Vite
+- Styling: Tailwind CSS, Material UI
+- UI Components: Radix UI
+- Routing: React Router
+- Animations: Motion
+
+---
+
+
   
