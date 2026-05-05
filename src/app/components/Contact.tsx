@@ -7,20 +7,85 @@ export function Contact() {
     name: '',
     email: '',
     phone: '',
+    subject: '',
     message: ''
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Thank you for your message! We will get back to you soon.');
-    setFormData({ name: '', email: '', phone: '', message: '' });
-  };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, email, phone, subject, message } = formData;
+
+    if (!name || !email || !phone || !subject || !message) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    const fullMessage = `Hi, I am ${name}.
+Subject: ${subject}
+Email: ${email}
+Phone: ${phone}
+
+Message: ${message}`;
+
+    const encodedMessage = encodeURIComponent(fullMessage);
+
+    const whatsappNumber = "919367720136";
+
+    const url = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+    window.open(url, "_blank");
+
     setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
+      name: '',
+      email: '',
+      phone: '',
+      subject: '',
+      message: ''
     });
+  };
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+
+    // 👉 Default messages based on subject
+    let defaultMessage = formData.message;
+
+    if (name === "subject") {
+      switch (value) {
+        case "Room Booking":
+          defaultMessage = "I would like to book a room. Please share availability and pricing.";
+          break;
+
+        case "Table Reservation":
+          defaultMessage = "I would like to reserve a table. Please confirm availability.";
+          break;
+
+        case "Food Order":
+          defaultMessage = "I would like to place a food order. Please share the menu.";
+          break;
+
+        case "Event / Party Booking":
+          defaultMessage = "I would like to book your venue for an event. Please provide details.";
+          break;
+
+        case "General Enquiry":
+          defaultMessage = "I would like to know more about your services.";
+          break;
+
+        default:
+          defaultMessage = "";
+      }
+    }
+
+    setFormData(prev => ({
+      ...prev,
+      [name]: value,
+      ...(name === "subject" && { message: defaultMessage }) // 👈 update message
+    }));
   };
 
   return (
@@ -201,6 +266,22 @@ export function Contact() {
                   className="w-full px-4 py-3 rounded-lg border border-[#2B1B17]/20 focus:outline-none focus:border-[#FF6B00]"
                   style={{ fontFamily: 'Poppins, sans-serif' }}
                 />
+              </div>
+              <div>
+                <select
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 rounded-lg border border-[#2B1B17]/20 focus:outline-none focus:border-[#FF6B00]"
+                  style={{ fontFamily: 'Poppins, sans-serif' }}
+                >
+                  <option value="">Select Subject</option>
+                  <option value="Table Reservation">Table Reservation</option>
+                  <option value="Food Order">Food Order</option>
+                  <option value="Event / Party Booking">Event / Party Booking</option>
+                  <option value="General Enquiry">General Enquiry</option>
+                </select>
               </div>
               <div>
                 <textarea

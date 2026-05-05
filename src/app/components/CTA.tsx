@@ -59,7 +59,7 @@ export function CTA() {
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => scrollToSection('contact')}
+              onClick={() => window.location.href = "tel:+919367720136"}  
               className="bg-white/20 backdrop-blur-md border-2 border-white text-white px-12 py-5 rounded-full text-xl hover:bg-white hover:text-[#8B0000] transition-all shadow-2xl flex items-center gap-3"
               style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 800 }}
             >
